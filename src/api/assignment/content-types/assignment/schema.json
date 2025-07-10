@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "assignments",
+  "info": {
+    "singularName": "assignment",
+    "pluralName": "assignments",
+    "displayName": "assignment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "teacerId": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::assignment.assignment",
+      "inversedBy": "course"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::assignment.assignment",
+      "mappedBy": "teacerId"
+    },
+    "deadline": {
+      "type": "date"
+    },
+    "file": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "student": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::assignment.assignment"
+    },
+    "score": {
+      "type": "integer"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "assignmentStatus": {
+      "type": "enumeration",
+      "enum": [
+        "notSubmitted_未提交",
+        "submitted_已提交",
+        "graded_已批改"
+      ]
+    }
+  }
+}

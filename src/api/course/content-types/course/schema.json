@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "singularName": "course",
+    "pluralName": "courses",
+    "displayName": "course"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "credit": {
+      "type": "decimal"
+    },
+    "teacherName": {
+      "type": "string"
+    },
+    "teacherId": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::assignment.assignment"
+    },
+    "semester": {
+      "type": "enumeration",
+      "enum": [
+        "spring(Spring)",
+        "summer(Summer)",
+        "fall(Fall)",
+        "winter(Winter)"
+      ]
+    },
+    "week": {
+      "type": "integer"
+    },
+    "classTime": {
+      "type": "string"
+    },
+    "classroom": {
+      "type": "string"
+    },
+    "students": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::assignment.assignment"
+    }
+  }
+}

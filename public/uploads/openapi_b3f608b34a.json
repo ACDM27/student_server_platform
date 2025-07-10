@@ -1,0 +1,3798 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "学生综合信息服务平台",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "首页仪表盘"
+    },
+    {
+      "name": "数据分析大屏"
+    },
+    {
+      "name": "课程与毕业要求"
+    },
+    {
+      "name": "作业管理"
+    },
+    {
+      "name": "教师信息查询"
+    },
+    {
+      "name": "成果收集与展示"
+    },
+    {
+      "name": "反馈申诉"
+    },
+    {
+      "name": "咨询预约"
+    },
+    {
+      "name": "简历生成"
+    },
+    {
+      "name": "登录注册"
+    }
+  ],
+  "paths": {
+    "/api/student/study-stats": {
+      "get": {
+        "summary": "获取学习状态",
+        "deprecated": false,
+        "description": "{\n\"studyStats\": {\n      \"creditEarned\": 120,\n      \"creditTotal\": 160,\n      \"gpa\": 3.8,\n      \"gpaScale\": 4.0\n}",
+        "tags": [
+          "首页仪表盘"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "studyStats": {
+                      "type": "object",
+                      "properties": {
+                        "creditEarned": {
+                          "type": "string",
+                          "description": "已修学分"
+                        },
+                        "creditTotal": {
+                          "type": "string",
+                          "description": "全部学分"
+                        },
+                        "gpa": {
+                          "type": "string",
+                          "description": "平均学分绩点"
+                        },
+                        "gpaScale": {
+                          "type": "string",
+                          "description": "绩点换算"
+                        }
+                      },
+                      "required": [
+                        "creditEarned",
+                        "creditTotal",
+                        "gpa",
+                        "gpaScale"
+                      ]
+                    },
+                    "taskStats": {
+                      "type": "object",
+                      "properties": {
+                        "pendingAssignments": {
+                          "type": "string",
+                          "description": "待完成作业"
+                        },
+                        "awardsCount": {
+                          "type": "string",
+                          "description": "奖项数量"
+                        }
+                      },
+                      "required": [
+                        "pendingAssignments",
+                        "awardsCount"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "studyStats",
+                    "taskStats"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/student/{student_id}/profile": {
+      "get": {
+        "summary": "查询学生信息",
+        "deprecated": false,
+        "description": "{\n  \"studentId\": \"24104030204\",\n  \"name\": \"张三\",\n  \"grade\": \"2024\",\n  \"major\": \"计算机科学与技术\",\n  \"college\": \"计算机学院\"\n}",
+        "tags": [
+          "首页仪表盘"
+        ],
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "studentTd",
+            "in": "query",
+            "description": "ID 编号",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "grade",
+            "in": "query",
+            "description": "年级",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "major",
+            "in": "query",
+            "description": "主修专业",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "college",
+            "in": "query",
+            "description": "所属学院",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "studentId": {
+                          "type": "string",
+                          "description": "学生学号"
+                        }
+                      },
+                      "required": [
+                        "studentId"
+                      ]
+                    },
+                    "college": {
+                      "type": "string",
+                      "description": "所属专业"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "学生姓名"
+                    },
+                    "grade": {
+                      "type": "string",
+                      "description": "年级"
+                    },
+                    "major": {
+                      "type": "string",
+                      "description": "专业"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "code",
+                    "message",
+                    "grade",
+                    "name",
+                    "major",
+                    "college"
+                  ],
+                  "readOnly": true
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/announcements": {
+      "get": {
+        "summary": "获取最新公告",
+        "deprecated": false,
+        "description": "\"announcements\": [\n      { \"title\": \"关于2024年春季学期选课通知\", \"date\": \"2024-01-10\" },\n      { \"title\": \"学生奖学金评定结果公示\", \"date\": \"2024-01-08\" }\n    ]",
+        "tags": [
+          "首页仪表盘"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "announcements": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "date": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "announcements",
+                    "title",
+                    "date"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/student/recent-tasks": {
+      "get": {
+        "summary": "获取最近任务",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "首页仪表盘"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "recentTasks": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "description": "待提交作业名称"
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "状态"
+                        },
+                        "deadline": {
+                          "type": "string",
+                          "description": "作业发布时间"
+                        }
+                      },
+                      "required": [
+                        "title",
+                        "status",
+                        "deadline"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "recentTasks"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/dashboard/academic-overview": {
+      "get": {
+        "summary": "获取学生学业总览数据",
+        "deprecated": false,
+        "description": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": {\n    \"totalCredit\": 240,\n    \"totalCreditRequired\": 320,\n    \"creditProgress\": 75,\n    \"gpa\": 3.8,\n    \"projectCompletionRate\": 75,\n    \"activeProjects\": 4,\n    \"weeklyStudyHours\": 42.7,\n    \"dailyAverageHours\": 6.1\n  }\n}\n",
+        "tags": [
+          "数据分析大屏"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "totalCredit": {
+                          "type": "string",
+                          "description": "240"
+                        },
+                        "totalCreditRequired": {
+                          "type": "string",
+                          "description": "320"
+                        },
+                        "creditProgress": {
+                          "type": "string",
+                          "description": "75"
+                        },
+                        "gpa": {
+                          "type": "string",
+                          "description": "3.8"
+                        },
+                        "projectCompletionRate": {
+                          "type": "string",
+                          "description": "75"
+                        },
+                        "activeProjects": {
+                          "type": "string",
+                          "description": "4"
+                        },
+                        "dailyAverageHours": {
+                          "type": "string",
+                          "description": "6.1"
+                        },
+                        "weeklyStudyHours": {
+                          "type": "string",
+                          "description": "42.7"
+                        }
+                      },
+                      "required": [
+                        "totalCredit",
+                        "totalCreditRequired",
+                        "creditProgress",
+                        "gpa",
+                        "projectCompletionRate",
+                        "activeProjects",
+                        "dailyAverageHours",
+                        "weeklyStudyHours"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/learning/time-progress": {
+      "get": {
+        "summary": "获取各类课程学时进度",
+        "deprecated": false,
+        "description": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": [\n    { \"category\": \"通识教育课程\", \"completed\": 76, \"total\": 80, \"rate\": 95 },\n    { \"category\": \"专业基础课程\", \"completed\": 90, \"total\": 100, \"rate\": 90 },\n  ]\n}",
+        "tags": [
+          "数据分析大屏"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "completed": {
+                          "type": "string"
+                        },
+                        "total": {
+                          "type": "string"
+                        },
+                        "rate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "category",
+                        "completed",
+                        "total",
+                        "rate"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/learning/assignment-progress": {
+      "get": {
+        "summary": "获取课程作业进度详情",
+        "deprecated": false,
+        "description": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": [\n    {\n      \"course\": \"数据结构\",\n      \"submitted\": 7,\n      \"pending\": 1,\n      \"overdue\": 0,\n      \"total\": 10,\n      \"rate\": 80\n    },\n    {\n      \"course\": \"人工智能\",\n      \"submitted\": 1,\n      \"pending\": 3,\n      \"overdue\": 2,\n      \"total\": 6,\n      \"rate\": 33\n    }\n  ]\n}",
+        "tags": [
+          "数据分析大屏"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "course": {
+                          "type": "string"
+                        },
+                        "submitted": {
+                          "type": "string"
+                        },
+                        "pending": {
+                          "type": "string"
+                        },
+                        "overdue": {
+                          "type": "string"
+                        },
+                        "total": {
+                          "type": "string"
+                        },
+                        "rate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "course",
+                        "submitted",
+                        "pending",
+                        "overdue",
+                        "total",
+                        "rate"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/student/projects": {
+      "get": {
+        "summary": "获取个人项目进度列表",
+        "deprecated": false,
+        "description": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": [\n    {\n      \"title\": \"毕业设计项目\",\n      \"startDate\": \"2024-05-15\",\n      \"progress\": 65,\n      \"priority\": \"高优先级\"\n    }\n  ]\n}",
+        "tags": [
+          "数据分析大屏"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string"
+                        },
+                        "starDate": {
+                          "type": "string"
+                        },
+                        "progress": {
+                          "type": "string"
+                        },
+                        "priority": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "title",
+                        "starDate",
+                        "progress",
+                        "priority"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "修改个人项目进度列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据分析大屏"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "删除个人项目进度列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "数据分析大屏"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/semester/current": {
+      "get": {
+        "summary": "获取当前学期信息",
+        "deprecated": false,
+        "description": "{\n  \"code\": 200,\n  \"message\": \"success\",\n  \"data\": {\n    \"semester\": \"2023-2024学年第二学期\",\n    \"updatedAt\": \"2025-06-29 00:57:30\"\n  }\n}",
+        "tags": [
+          "课程与毕业要求"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/schedule/week": {
+      "get": {
+        "summary": "获取本周课程列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "课程与毕业要求"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "week": {
+                          "type": "string"
+                        },
+                        "totalCourses": {
+                          "type": "string"
+                        },
+                        "totalCredits": {
+                          "type": "string"
+                        },
+                        "coreCourses": {
+                          "type": "string"
+                        },
+                        "practicalCourses": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "week",
+                        "totalCourses",
+                        "totalCredits",
+                        "coreCourses",
+                        "practicalCourses"
+                      ]
+                    },
+                    "courseList": {
+                      "type": "object",
+                      "properties": {
+                        "courseName": {
+                          "type": "string",
+                          "description": "课程名称"
+                        },
+                        "courseCode": {
+                          "type": "string",
+                          "description": "课程编码"
+                        },
+                        "credit": {
+                          "type": "string",
+                          "description": "获得学分"
+                        },
+                        "teacher": {
+                          "type": "string",
+                          "description": "课程老师"
+                        },
+                        "time": {
+                          "type": "string",
+                          "description": "授课时间"
+                        },
+                        "dayOfWeek": {
+                          "type": "string",
+                          "description": "周时间"
+                        },
+                        "classroom": {
+                          "type": "string",
+                          "description": "授课教室"
+                        },
+                        "nextSession": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "rating": {
+                          "type": "string"
+                        },
+                        "selectedCount": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "courseName",
+                        "courseCode",
+                        "credit",
+                        "teacher",
+                        "time",
+                        "dayOfWeek",
+                        "classroom",
+                        "nextSession",
+                        "type",
+                        "rating",
+                        "selectedCount"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data",
+                    "courseList"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/schedule/all": {
+      "get": {
+        "summary": "获取全部课程列表",
+        "deprecated": false,
+        "description": "{\n  \"courses\": [\n    {\n      \"courseName\": \"人工智能导论\",\n      \"courseCode\": \"CS401\",\n      \"credit\": 3,\n      \"teacher\": \"刘教授\",\n      \"time\": \"16:00-18:00\",\n      \"dayOfWeek\": \"周四\",\n      \"classroom\": \"计算机楼A401\",\n      \"nextSession\": \"2024-01-11\",\n      \"type\": \"专业选修课\",\n      \"rating\": 4.9,\n      \"selectedCount\": 60\n    },\n  ]\n}",
+        "tags": [
+          "课程与毕业要求"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "courses": {
+                      "type": "object",
+                      "properties": {
+                        "courseName": {
+                          "type": "string"
+                        },
+                        "courseCode": {
+                          "type": "string"
+                        },
+                        "credit": {
+                          "type": "string"
+                        },
+                        "teacher": {
+                          "type": "string"
+                        },
+                        "time": {
+                          "type": "string"
+                        },
+                        "dayOfWeek": {
+                          "type": "string"
+                        },
+                        "classroom": {
+                          "type": "string"
+                        },
+                        "nextSession": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "rating": {
+                          "type": "string"
+                        },
+                        "selectedCount": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "courseName",
+                        "courseCode",
+                        "credit",
+                        "teacher",
+                        "time",
+                        "dayOfWeek",
+                        "classroom",
+                        "nextSession",
+                        "type",
+                        "rating",
+                        "selectedCount"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "courses"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/schedule/search": {
+      "get": {
+        "summary": "查询其他课程",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "课程与毕业要求"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "课程名/教师/课程代码关键字",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "课程类型（例如“核心课程”、“专业选修”等）",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "object",
+                      "properties": {
+                        "courseName": {
+                          "type": "string"
+                        },
+                        "courseCode": {
+                          "type": "string"
+                        },
+                        "credit": {
+                          "type": "string"
+                        },
+                        "teacher": {
+                          "type": "string"
+                        },
+                        "time": {
+                          "type": "string"
+                        },
+                        "dayOfWeek": {
+                          "type": "string"
+                        },
+                        "classroom": {
+                          "type": "string"
+                        },
+                        "nextSession": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "rating": {
+                          "type": "string"
+                        },
+                        "selectedCount": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "courseName",
+                        "courseCode",
+                        "credit",
+                        "teacher",
+                        "time",
+                        "dayOfWeek",
+                        "classroom",
+                        "nextSession",
+                        "type",
+                        "rating",
+                        "selectedCount"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "results"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/assistant/recommendation": {
+      "post": {
+        "summary": "智能学习方案推荐",
+        "deprecated": false,
+        "description": "{\n  \"userId\": \"2021010001\",\n  \"userName\": \"张三\",\n  \"major\": \"计算机科学与技术\",\n  \"currentTerm\": \"2024-2025第二学期\",\n  \"courseGoals\": \"希望侧重AI方向，毕业前完成所有专业核心课\",\n  \"completedCourses\": [\n    {\"name\": \"软件工程\", \"code\": \"CS301\", \"credit\": 3},\n    {\"name\": \"人工智能导论\", \"code\": \"CS401\", \"credit\": 3}\n  ],\n  \"modelContext\": {\n    \"totalCreditsRequired\": 140,\n    \"creditsCompleted\": 114,\n    \"coreCoursesRequired\": 60,\n    \"coreCoursesCompleted\": 48,\n    \"remainingSemesters\": 2\n  }\n}",
+        "tags": [
+          "课程与毕业要求"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "major",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "currentTerm",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "completedCourses",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "courseGoals",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "modelContext": {
+                      "type": "object",
+                      "properties": {
+                        "totalCreditsRequired": {
+                          "type": "string"
+                        },
+                        "creditsCompleted": {
+                          "type": "string"
+                        },
+                        "coreCoursesRequired": {
+                          "type": "string"
+                        },
+                        "coreCoursesCompleted": {
+                          "type": "string"
+                        },
+                        "remainingSemesters": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "totalCreditsRequired",
+                        "creditsCompleted",
+                        "coreCoursesRequired",
+                        "coreCoursesCompleted",
+                        "remainingSemesters"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "modelContext"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/assignments": {
+      "get": {
+        "summary": "查询作业列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "作业管理"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "courseId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "string"
+                        },
+                        "pageSize": {
+                          "type": "string"
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "course": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "name"
+                                ]
+                              },
+                              "teacher": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "name"
+                                ]
+                              },
+                              "estimatedHours": {
+                                "type": "string"
+                              },
+                              "assignedAt": {
+                                "type": "string",
+                                "description": " 发布时间"
+                              },
+                              "dueAt": {
+                                "type": "string",
+                                "description": "截止时间"
+                              },
+                              "submitCount": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "priority": {
+                                "type": "string"
+                              },
+                              "attachments": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "url": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "name",
+                                  "url"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "title",
+                              "course",
+                              "teacher",
+                              "estimatedHours",
+                              "submitCount",
+                              "status",
+                              "priority",
+                              "attachments",
+                              "assignedAt",
+                              "dueAt"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "page",
+                        "pageSize",
+                        "items"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/assignments/{assignmentId}/submissions": {
+      "post": {
+        "summary": "提交作业",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "作业管理"
+        ],
+        "parameters": [
+          {
+            "name": "assignmentId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "submissionId": {
+                          "type": "string"
+                        },
+                        "assignmentId": {
+                          "type": "string"
+                        },
+                        "submittedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "submissionId",
+                        "assignmentId",
+                        "submittedAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/assignments/{assignmentId}/submissions/{submissionId}": {
+      "patch": {
+        "summary": "修改已提交作业",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "作业管理"
+        ],
+        "parameters": [
+          {
+            "name": "assignmentId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "submissionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "submissionId": {
+                          "type": "string"
+                        },
+                        "assignmentId": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "submissionId",
+                        "assignmentId",
+                        "updatedAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/teachers": {
+      "get": {
+        "summary": "教师列表查询",
+        "deprecated": false,
+        "description": "{\n  \"code\": 0,\n  \"message\": \"success\",\n  \"data\": {\n    \"total\": 3,\n    \"page\": 1,\n    \"pageSize\": 10,\n    \"items\": [\n      {\n        \"id\": \"t1001\",\n        \"name\": \"李明华\",\n        \"title\": \"教授\",\n        \"college\": \"计算机科学与技术学院\",\n        \"researchDirections\": [\"人工智能\", \"机器学习\", \"深度学习\"],\n        \"currentCourses\": [\n          { \"name\": \"机器学习\",    \"rating\": 4.8 },\n          { \"name\": \"人工智能导论\", \"rating\": 4.7 }\n        ],\n        \"office\": \"计算机楼A301\",\n        \"officeHours\": \"周二、周四 14:00-16:00\",\n        \"ratingAvg\": 4.8,\n        \"studentCount\": 265,\n        \"isRecruiting\": true\n      },\n    ]\n  }\n}",
+        "tags": [
+          "教师信息查询"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "college",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "string"
+                        },
+                        "pageSize": {
+                          "type": "string"
+                        },
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "college": {
+                              "type": "string"
+                            },
+                            "researchDirections": {
+                              "type": "string"
+                            },
+                            "currentCourses": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string"
+                                },
+                                "rating": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "rating"
+                              ]
+                            },
+                            "office": {
+                              "type": "string"
+                            },
+                            "officeHours": {
+                              "type": "string"
+                            },
+                            "ratingAvg": {
+                              "type": "string"
+                            },
+                            "studentCount": {
+                              "type": "string"
+                            },
+                            "isRecruiting": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "name",
+                            "title",
+                            "college",
+                            "researchDirections",
+                            "currentCourses",
+                            "office",
+                            "officeHours",
+                            "ratingAvg",
+                            "studentCount",
+                            "isRecruiting"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "page",
+                        "pageSize",
+                        "items"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/teachers/{teacherId}/favorite": {
+      "post": {
+        "summary": "收藏教师",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "教师信息查询"
+        ],
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/student/achievements": {
+      "get": {
+        "summary": "获取学生荣誉列表",
+        "deprecated": false,
+        "description": "{\n  \"code\": 0,\n  \"message\": \"success\",\n  \"data\": {\n    \"total\": 5,\n    \"page\": 1,\n    \"pageSize\": 10,\n    \"items\": [\n      {\n        \"id\": \"h1001\",\n        \"title\": \"学业优秀奖学金一等奖\",\n        \"certificateNo\": \"XY2023001\",\n        \"category\": \"学业类\",\n        \"level\": \"校级\",\n        \"issuedBy\": \"计算机学院\",\n        \"date\": \"2023-10\",\n        \"tags\": [\"学习优秀\",\"成绩突出\"],\n        \"description\": \"GPA 3.8/4.0，专业排名前5%\",\n        \"status\": \"已获得\"\n      },\n      {\n        \"id\": \"h1002\",\n        \"title\": \"程序设计竞赛二等奖\",\n        \"certificateNo\": \"CS2023002\",\n        \"category\": \"竞赛类\",\n        \"level\": \"校级\",\n        \"issuedBy\": \"计算机学院\",\n        \"date\": \"2023-11\",\n        \"tags\": [\"编程能力\",\"算法思维\"],\n        \"description\": \"在校级程序设计竞赛中获得二等奖\",\n        \"status\": \"已获得\"\n      },\n    ]\n  }\n}\n",
+        "tags": [
+          "教师信息查询"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "string"
+                        },
+                        "pageSize": {
+                          "type": "string"
+                        },
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "category": {
+                              "type": "string"
+                            },
+                            "level": {
+                              "type": "string"
+                            },
+                            "issuedBy": {
+                              "type": "string"
+                            },
+                            "date": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "category",
+                            "level",
+                            "issuedBy",
+                            "date",
+                            "description"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "page",
+                        "pageSize",
+                        "items"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/user/achievements/statistics": {
+      "get": {
+        "summary": "学生荣誉数量统计",
+        "deprecated": false,
+        "description": "{\n  \"code\": 0,\n  \"message\": \"success\",\n  \"data\": {\n    \"total\": 5,\n    \"byCategory\": {\n      \"学业类\": 2,\n      \"竞赛类\": 1,\n      \"思政类\": 1,\n      \"志愿类\": 1,\n      \"校级荣誉\": 4\n    }\n  }\n}",
+        "tags": [
+          "成果收集与展示"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "byCategory": {
+                          "type": "object",
+                          "properties": {
+                            "学术科研类": {
+                              "type": "string"
+                            },
+                            "专业技能类": {
+                              "type": "string"
+                            },
+                            "社会实践类": {
+                              "type": "string"
+                            },
+                            "综合竞赛类": {
+                              "type": "string"
+                            },
+                            "文体素质类": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "学术科研类",
+                            "专业技能类",
+                            "社会实践类",
+                            "综合竞赛类",
+                            "文体素质类"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "byCategory"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/student/achievements/{achievementsId}": {
+      "get": {
+        "summary": "获取学生荣誉详情",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "成果收集与展示"
+        ],
+        "parameters": [
+          {
+            "name": "achievementsId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "certificateNo": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "level": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "certificateNo",
+                        "category",
+                        "level"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/achievements/metadata": {
+      "get": {
+        "summary": "查询成果收集表单",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "成果收集与展示"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "categories": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string",
+                              "description": "成果分类"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "name"
+                          ]
+                        },
+                        "subcategories": {
+                          "type": "object",
+                          "properties": {
+                            "academic": {
+                              "type": "string"
+                            },
+                            "competition": {
+                              "type": "string"
+                            },
+                            "project": {
+                              "type": "string"
+                            },
+                            "internship": {
+                              "type": "string"
+                            },
+                            "certificate": {
+                              "type": "string"
+                            },
+                            "volunteer": {
+                              "type": "string"
+                            },
+                            "other": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "academic",
+                            "competition",
+                            "project",
+                            "internship",
+                            "certificate",
+                            "volunteer",
+                            "other"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "categories",
+                        "subcategories"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/achievements": {
+      "post": {
+        "summary": "创建上传学习成果",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "成果收集与展示"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "studentId": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "subcategory": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "organization": {
+                    "type": "string"
+                  },
+                  "result": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "string"
+                  },
+                  "attachments": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "studentId",
+                  "category",
+                  "subcategory",
+                  "title",
+                  "description",
+                  "date",
+                  "organization",
+                  "result",
+                  "tags",
+                  "attachments"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "achievementId": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "achievementId",
+                        "createdAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/feedbacks": {
+      "post": {
+        "summary": "提交反馈申诉",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "反馈申诉"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "studentId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "attachments": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "studentId",
+                  "title",
+                  "category",
+                  "content",
+                  "attachments"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "feedbackId": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "feedbackId",
+                        "createdAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/feedbacks/{feedbackId}": {
+      "get": {
+        "summary": "查看反馈申诉列表",
+        "deprecated": false,
+        "description": "{\n  \"code\": 0,\n  \"message\": \"查询成功\",\n  \"data\": {\n    \"feedbackId\": \"fb2025070712345\",\n    \"studentId\": \"stu20250701\",\n    \"title\": \"作业批改延迟反馈\",\n    \"category\": \"申诉\",\n    \"content\": \"我在提交后两天仍未收到批改结果，请问进度如何？\",\n    \"attachments\": [\"https://.../img1.png\"],\n    \"status\": \"pending\",       // pending / processing / resolved\n    \"reply\": \"老师回复内容……\", // 如果已经有处理意见\n    \"createdAt\": \"2025-07-07T18:20:30Z\",\n    \"updatedAt\": \"2025-07-08T09:15:00Z\"\n  }\n}",
+        "tags": [
+          "反馈申诉"
+        ],
+        "parameters": [
+          {
+            "name": "feedbackId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "feedbackId": {
+                          "type": "string"
+                        },
+                        "studentId": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "attachments": {
+                          "type": "string"
+                        },
+                        "currentStatus": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "feedbackId",
+                        "studentId",
+                        "title",
+                        "category",
+                        "content",
+                        "attachments",
+                        "currentStatus",
+                        "createdAt",
+                        "updatedAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "put": {
+        "summary": "更新反馈申诉",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "反馈申诉"
+        ],
+        "parameters": [
+          {
+            "name": "feedbackId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "feedbackId": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "feedbackId",
+                        "status",
+                        "updatedAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "summary": "删除反馈申诉",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "反馈申诉"
+        ],
+        "parameters": [
+          {
+            "name": "feedbackId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/consultations/statistics": {
+      "get": {
+        "summary": "获取咨询服务概览统计",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "咨询预约"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "totalProfessionals": {
+                          "type": "string",
+                          "description": "专业咨询师总数"
+                        },
+                        "avgRating": {
+                          "type": "string",
+                          "description": "平均评分"
+                        },
+                        "totalSessions": {
+                          "type": "string",
+                          "description": "累计咨询总数"
+                        },
+                        "emergencyOnline": {
+                          "type": "string",
+                          "description": "紧急在线数"
+                        }
+                      },
+                      "required": [
+                        "totalProfessionals",
+                        "avgRating",
+                        "totalSessions",
+                        "emergencyOnline"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/consultations/consultants": {
+      "get": {
+        "summary": "查询咨询师列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "咨询预约"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "string"
+                        },
+                        "pageSize": {
+                          "type": "string"
+                        },
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "consultantId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "avatarUrl": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "org": {
+                              "type": "string"
+                            },
+                            "specialties": {
+                              "type": "string"
+                            },
+                            "experienceYears": {
+                              "type": "string"
+                            },
+                            "sessionsCount": {
+                              "type": "string"
+                            },
+                            "avgRating": {
+                              "type": "string"
+                            },
+                            "category": {
+                              "type": "string"
+                            },
+                            "isAvailable": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "consultantId",
+                            "name",
+                            "avatarUrl",
+                            "title",
+                            "org",
+                            "specialties",
+                            "experienceYears",
+                            "sessionsCount",
+                            "avgRating",
+                            "category",
+                            "isAvailable"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "total",
+                        "page",
+                        "pageSize",
+                        "items"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/consultations/appointments": {
+      "post": {
+        "summary": "发起咨询预约",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "咨询预约"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "consultantId": {
+                    "type": "string"
+                  },
+                  "studentId": {
+                    "type": "string"
+                  },
+                  "scheduledTime": {
+                    "type": "string"
+                  },
+                  "topic": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "consultantId",
+                  "studentId",
+                  "scheduledTime",
+                  "topic"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "appointmentId": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "appointmentId",
+                        "status",
+                        "createdAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/consultations/appointments/{appointmentId}": {
+      "delete": {
+        "summary": "取消预约",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "咨询预约"
+        ],
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/resumes": {
+      "get": {
+        "summary": "获取学生的简历数据",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "简历生成"
+        ],
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "{studentId}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "resumeId": {
+                          "type": "string"
+                        },
+                        "template": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "resumeId",
+                        "template",
+                        "updatedAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "创建更新简历",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "简历生成"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "resumeId": {
+                    "type": "string"
+                  },
+                  "template": {
+                    "type": "string"
+                  },
+                  "studentId": {
+                    "type": "string"
+                  },
+                  "basicInfo": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "studentNo": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "address": {
+                        "type": "string"
+                      },
+                      "objective": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "studentNo",
+                      "phone",
+                      "email",
+                      "address",
+                      "objective"
+                    ]
+                  },
+                  "education": {
+                    "type": "object",
+                    "properties": {
+                      "school": {
+                        "type": "string"
+                      },
+                      "degree": {
+                        "type": "string"
+                      },
+                      "major": {
+                        "type": "string"
+                      },
+                      "startDate": {
+                        "type": "string"
+                      },
+                      "endDate": {
+                        "type": "string"
+                      },
+                      "gpa": {
+                        "type": "string"
+                      },
+                      "courses": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "school",
+                      "degree",
+                      "major",
+                      "startDate",
+                      "endDate",
+                      "gpa",
+                      "courses"
+                    ]
+                  },
+                  "workExperience": {
+                    "type": "object",
+                    "properties": {
+                      "company": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "string"
+                      },
+                      "startDate": {
+                        "type": "string"
+                      },
+                      "endDate": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "company",
+                      "position",
+                      "startDate",
+                      "endDate",
+                      "description"
+                    ]
+                  },
+                  "projects": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      },
+                      "startDate": {
+                        "type": "string"
+                      },
+                      "endDate": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "role",
+                      "startDate",
+                      "endDate",
+                      "description"
+                    ]
+                  },
+                  "skills": {
+                    "type": "string"
+                  },
+                  "certificates": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "issuedBy": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "issuedBy",
+                      "date"
+                    ]
+                  }
+                },
+                "required": [
+                  "resumeId",
+                  "template",
+                  "studentId",
+                  "basicInfo",
+                  "education",
+                  "workExperience",
+                  "projects",
+                  "skills",
+                  "certificates"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "resumeId": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "resumeId",
+                        "updatedAt"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/resumes/{resumeId}/export": {
+      "post": {
+        "summary": "导出简历",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "简历生成"
+        ],
+        "parameters": [
+          {
+            "name": "resumeId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "format": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "format"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "downloadUrl": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "downloadUrl"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "用户登录",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "登录注册"
+        ],
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    },
+                    "userId": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "expiresIn": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "token",
+                    "userId",
+                    "role",
+                    "expiresIn"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "summary": "用户注册",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "登录注册"
+        ],
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "confirmPassword",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "verificationCode",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "userId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "userId"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/auth/send-code": {
+      "get": {
+        "summary": "获取验证码",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "登录注册"
+        ],
+        "parameters": [
+          {
+            "name": "phone",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "验证码请求"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": [],
+  "security": []
+}

@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "consults",
+  "info": {
+    "singularName": "consult",
+    "pluralName": "consults",
+    "displayName": "consult"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "student": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::assignment.assignment"
+    },
+    "consult_type": {
+      "type": "enumeration",
+      "enum": [
+        "psychology_心理",
+        "career_职业"
+      ]
+    },
+    "content": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "time": {
+      "type": "string"
+    },
+    "consultstatus": {
+      "type": "enumeration",
+      "enum": [
+        "Pending​​_待处理",
+        "Processed​_已处理",
+        "Terminated_取消"
+      ]
+    }
+  }
+}
