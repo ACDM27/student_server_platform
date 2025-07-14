@@ -53,6 +53,13 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::assignment.assignment"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "CompulsoryCourse_必修",
+        "ElectiveCourse_ 选修"
+      ]
     }
   }
 }

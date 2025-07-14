@@ -1,0 +1,101 @@
+{
+    "kind": "collectionType",
+    "collectionName": "achievements",
+    "info": {
+        "singularName": "achievement",
+        "pluralName": "achievements",
+        "displayName": "honor"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "student_id": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "category": {
+            "type": "enumeration",
+            "enum": [
+                "competition_竞赛",
+                "research_科研",
+                "project_项目",
+                "paper_论文",
+                "patent_专利",
+                "certification​_证书"
+            ]
+        },
+        "award": {
+            "type": "enumeration",
+            "enum": [
+                "first prize_一等奖",
+                "second prize_二等奖",
+                "third prize_三等奖",
+                "honorable mention_优胜奖",
+                "grand prize_特等奖",
+                "other_其他"
+            ]
+        },
+        "level": {
+            "type": "enumeration",
+            "enum": [
+                "collegeLevel_院级",
+                "universityLevel_校级",
+                "provincialLevel_省部级",
+                "internationalLevel_国际级"
+            ]
+        },
+        "date": {
+            "type": "date"
+        },
+        "title": {
+            "type": "string"
+        },
+        "attachments": {
+            "type": "media",
+            "multiple": true,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        },
+        "tutor_name": {
+            "type": "string"
+        },
+        "teachers": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::achievement.achievement",
+            "inversedBy": "students"
+        },
+        "students": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::achievement.achievement",
+            "mappedBy": "teachers"
+        },
+        "resume": {
+            "type": "relation",
+            "relation": "oneToOne",
+            "target": "api::resume.resume",
+            "inversedBy": "student"
+        },
+        "statistic": {
+            "type": "relation",
+            "relation": "oneToOne",
+            "target": "api::statistic.statistic",
+            "mappedBy": "student"
+        },
+        "achievements": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::student.student",
+            "inversedBy": "students"
+        }
+    }
+}

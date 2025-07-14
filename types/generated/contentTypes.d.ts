@@ -373,6 +373,87 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAchievementAchievement extends Struct.CollectionTypeSchema {
+  collectionName: 'achievements';
+  info: {
+    displayName: 'honor';
+    pluralName: 'achievements';
+    singularName: 'achievement';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    achievements: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::student.student'
+    >;
+    attachments: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    award: Schema.Attribute.Enumeration<
+      [
+        'first prize_\u4E00\u7B49\u5956',
+        'second prize_\u4E8C\u7B49\u5956',
+        'third prize_\u4E09\u7B49\u5956',
+        'honorable mention_\u4F18\u80DC\u5956',
+        'grand prize_\u7279\u7B49\u5956',
+        'other_\u5176\u4ED6',
+      ]
+    >;
+    category: Schema.Attribute.Enumeration<
+      [
+        'competition_\u7ADE\u8D5B',
+        'research_\u79D1\u7814',
+        'project_\u9879\u76EE',
+        'paper_\u8BBA\u6587',
+        'patent_\u4E13\u5229',
+        'certification\u200B_\u8BC1\u4E66',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    level: Schema.Attribute.Enumeration<
+      [
+        'collegeLevel_\u9662\u7EA7',
+        'universityLevel_\u6821\u7EA7',
+        'provincialLevel_\u7701\u90E8\u7EA7',
+        'internationalLevel_\u56FD\u9645\u7EA7',
+      ]
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::achievement.achievement'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    resume: Schema.Attribute.Relation<'oneToOne', 'api::resume.resume'>;
+    statistic: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::statistic.statistic'
+    >;
+    student_id: Schema.Attribute.String;
+    students: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::achievement.achievement'
+    >;
+    teachers: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::achievement.achievement'
+    >;
+    title: Schema.Attribute.String;
+    tutor_name: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiAssignmentAssignment extends Struct.CollectionTypeSchema {
   collectionName: 'assignments';
   info: {
@@ -418,6 +499,7 @@ export interface ApiAssignmentAssignment extends Struct.CollectionTypeSchema {
       'oneToOne',
       'api::assignment.assignment'
     >;
+    teachers: Schema.Attribute.Relation<'manyToOne', 'api::consult.consult'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -444,25 +526,30 @@ export interface ApiConsultConsult extends Struct.CollectionTypeSchema {
         'Pending\u200B\u200B_\u5F85\u5904\u7406',
         'Processed\u200B_\u5DF2\u5904\u7406',
         'Terminated_\u53D6\u6D88',
+        'completed_\u5DF2\u5B8C\u6210',
       ]
     >;
-    content: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date;
+    feedback: Schema.Attribute.Blocks;
+    is_anonymous: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::consult.consult'
     > &
       Schema.Attribute.Private;
+    phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     student: Schema.Attribute.Relation<
-      'oneToOne',
+      'oneToMany',
       'api::assignment.assignment'
     >;
+    student_id: Schema.Attribute.String;
     time: Schema.Attribute.String;
+    title: Schema.Attribute.Blocks;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -508,6 +595,9 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       'api::assignment.assignment'
     >;
     teacherName: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      ['CompulsoryCourse_\u5FC5\u4FEE', 'ElectiveCourse_ \u9009\u4FEE']
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -526,73 +616,44 @@ export interface ApiFeedbackFeedback extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    attachments: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    category: Schema.Attribute.Enumeration<
+      [
+        'Suggestion_\u5EFA\u8BAE',
+        'Appeal_\u7533\u8BC9',
+        'Issue_\u95EE\u9898',
+        'Other_\u5176\u4ED6',
+      ]
+    >;
+    content: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    email: Schema.Attribute.Email;
+    feedbackstatus: Schema.Attribute.Enumeration<
+      [
+        'pending_\u5F85\u5904\u7406',
+        'processing_\u5904\u7406\u4E2D',
+        'resolved_\u5DF2\u5904\u7406',
+      ]
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::feedback.feedback'
     > &
       Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiHonorHonor extends Struct.CollectionTypeSchema {
-  collectionName: 'honors';
-  info: {
-    displayName: 'student';
-    pluralName: 'honors';
-    singularName: 'honor';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    className: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdate: Schema.Attribute.Date;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
-    grade: Schema.Attribute.Integer;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::honor.honor'> &
-      Schema.Attribute.Private;
-    major: Schema.Attribute.String;
     name: Schema.Attribute.String;
     phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    studentId: Schema.Attribute.UID;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedate: Schema.Attribute.Date;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiJobJob extends Struct.CollectionTypeSchema {
-  collectionName: 'jobs';
-  info: {
-    displayName: 'job';
-    pluralName: 'jobs';
-    singularName: 'job';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
+    reply: Schema.Attribute.Blocks;
+    student_id: Schema.Attribute.String;
+    time: Schema.Attribute.String;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -610,9 +671,12 @@ export interface ApiResumeResume extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    basicInfo: Schema.Attribute.Component<'resume.basic-info', true>;
+    certificates: Schema.Attribute.Component<'resume.certificates', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    education: Schema.Attribute.Component<'resume.education', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -620,6 +684,143 @@ export interface ApiResumeResume extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    skills: Schema.Attribute.Blocks;
+    student: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::achievement.achievement'
+    >;
+    template: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    workExperience: Schema.Attribute.Component<'resume.work-experience', true>;
+  };
+}
+
+export interface ApiStatisticStatistic extends Struct.CollectionTypeSchema {
+  collectionName: 'statistics';
+  info: {
+    displayName: 'Statistic';
+    pluralName: 'statistics';
+    singularName: 'statistic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    achievementCount: Schema.Attribute.Integer;
+    assignmentsCompleted: Schema.Attribute.Integer;
+    assignmentsPending: Schema.Attribute.Integer;
+    averageGpa: Schema.Attribute.Decimal;
+    consultationCount: Schema.Attribute.Integer;
+    coursesByType: Schema.Attribute.JSON;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    creditsEarned: Schema.Attribute.Integer;
+    electiveCourses: Schema.Attribute.Integer;
+    feedbackCount: Schema.Attribute.Integer;
+    gradeDistribution: Schema.Attribute.JSON;
+    jobsCount: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::statistic.statistic'
+    > &
+      Schema.Attribute.Private;
+    mandatoryCourses: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    student: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::achievement.achievement'
+    >;
+    studyTimeDistribution: Schema.Attribute.JSON;
+    surveyCount: Schema.Attribute.Integer;
+    totalAssignments: Schema.Attribute.Integer;
+    totalCourses: Schema.Attribute.Integer;
+    totalStudyHours: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedate: Schema.Attribute.Date;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
+  collectionName: 'students';
+  info: {
+    displayName: 'student';
+    pluralName: 'students';
+    singularName: 'student';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    claaName: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    eamil: Schema.Attribute.Email;
+    grade: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::student.student'
+    > &
+      Schema.Attribute.Private;
+    major: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    studentId: Schema.Attribute.UID;
+    students: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::achievement.achievement'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTeacherTeacher extends Struct.CollectionTypeSchema {
+  collectionName: 'teachers';
+  info: {
+    displayName: 'teacher';
+    pluralName: 'teachers';
+    singularName: 'teacher';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    avatar: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    contactEmail: Schema.Attribute.Email;
+    contactPhone: Schema.Attribute.String;
+    courses: Schema.Attribute.JSON;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    department: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::teacher.teacher'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    officeHours: Schema.Attribute.DateTime;
+    officeLocation: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    rating: Schema.Attribute.Decimal;
+    recruiting: Schema.Attribute.Boolean;
+    researchAreas: Schema.Attribute.JSON;
+    studentCount: Schema.Attribute.Integer;
+    title: Schema.Attribute.Enumeration<['Lecturer', 'Professor']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1135,13 +1336,15 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::achievement.achievement': ApiAchievementAchievement;
       'api::assignment.assignment': ApiAssignmentAssignment;
       'api::consult.consult': ApiConsultConsult;
       'api::course.course': ApiCourseCourse;
       'api::feedback.feedback': ApiFeedbackFeedback;
-      'api::honor.honor': ApiHonorHonor;
-      'api::job.job': ApiJobJob;
       'api::resume.resume': ApiResumeResume;
+      'api::statistic.statistic': ApiStatisticStatistic;
+      'api::student.student': ApiStudentStudent;
+      'api::teacher.teacher': ApiTeacherTeacher;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,0 +1,29 @@
+{
+    "collectionName": "components_resume_projects",
+    "info": {
+        "displayName": "projects",
+        "icon": "file"
+    },
+    "options": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "role": {
+            "type": "string"
+        },
+        "startDate": {
+            "type": "date"
+        },
+        "endDate": {
+            "type": "date"
+        },
+        "techStack": {
+            "type": "string"
+        },
+        "description": {
+            "type": "blocks"
+        }
+    },
+    "config": {}
+}

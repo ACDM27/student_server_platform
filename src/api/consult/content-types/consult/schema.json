@@ -13,8 +13,9 @@
   "attributes": {
     "student": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::assignment.assignment"
+      "relation": "oneToMany",
+      "target": "api::assignment.assignment",
+      "mappedBy": "teachers"
     },
     "consult_type": {
       "type": "enumeration",
@@ -22,9 +23,6 @@
         "psychology_心理",
         "career_职业"
       ]
-    },
-    "content": {
-      "type": "string"
     },
     "date": {
       "type": "date"
@@ -37,8 +35,24 @@
       "enum": [
         "Pending​​_待处理",
         "Processed​_已处理",
-        "Terminated_取消"
+        "Terminated_取消",
+        "completed_已完成"
       ]
+    },
+    "student_id": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "feedback": {
+      "type": "blocks"
+    },
+    "title": {
+      "type": "blocks"
+    },
+    "is_anonymous": {
+      "type": "boolean"
     }
   }
 }

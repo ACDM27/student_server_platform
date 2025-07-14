@@ -60,6 +60,12 @@
         "submitted_已提交",
         "graded_已批改"
       ]
+    },
+    "teachers": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::consult.consult",
+      "inversedBy": "student"
     }
   }
 }

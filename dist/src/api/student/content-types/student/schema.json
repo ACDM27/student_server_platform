@@ -1,0 +1,42 @@
+{
+    "kind": "collectionType",
+    "collectionName": "students",
+    "info": {
+        "singularName": "student",
+        "pluralName": "students",
+        "displayName": "student"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "studentId": {
+            "type": "uid"
+        },
+        "eamil": {
+            "type": "email"
+        },
+        "phone": {
+            "type": "string"
+        },
+        "major": {
+            "type": "string"
+        },
+        "grade": {
+            "type": "integer"
+        },
+        "claaName": {
+            "type": "string"
+        },
+        "students": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::achievement.achievement",
+            "mappedBy": "achievements"
+        }
+    }
+}

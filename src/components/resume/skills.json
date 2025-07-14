@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_resume_skills",
+  "info": {
+    "displayName": "skills",
+    "icon": "file"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "level": {
+      "type": "enumeration",
+      "enum": [
+        "Beginner_初级",
+        "Intermediate_中等",
+        "Advanced_熟练",
+        "Expert_专家"
+      ]
+    }
+  },
+  "config": {}
+}

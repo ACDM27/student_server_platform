@@ -2,7 +2,14 @@ export default [
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
-  'strapi::cors',
+  {
+    name: 'strapi::cors',
+    config: {
+      enabled: true,
+      headers: '*',
+      origin: ['http://localhost:3000/'] // 允许的前端域名列表
+    }
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',

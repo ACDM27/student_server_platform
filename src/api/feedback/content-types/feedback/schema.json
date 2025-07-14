@@ -10,5 +10,60 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
-  "attributes": {}
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "student_id": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "time": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Suggestion_建议",
+        "Appeal_申诉",
+        "Issue_问题",
+        "Other_其他"
+      ]
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "attachments": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "feedbackstatus": {
+      "type": "enumeration",
+      "enum": [
+        "pending_待处理",
+        "processing_处理中",
+        "resolved_已处理"
+      ]
+    },
+    "reply": {
+      "type": "blocks"
+    }
+  }
 }

@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "statistics",
+  "info": {
+    "singularName": "statistic",
+    "pluralName": "statistics",
+    "displayName": "Statistic"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "student": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::achievement.achievement",
+      "inversedBy": "statistic"
+    },
+    "creditsEarned": {
+      "type": "integer"
+    },
+    "averageGpa": {
+      "type": "decimal"
+    },
+    "totalCourses": {
+      "type": "integer"
+    },
+    "mandatoryCourses": {
+      "type": "integer"
+    },
+    "electiveCourses": {
+      "type": "integer"
+    },
+    "totalAssignments": {
+      "type": "integer"
+    },
+    "assignmentsCompleted": {
+      "type": "integer"
+    },
+    "assignmentsPending": {
+      "type": "integer"
+    },
+    "feedbackCount": {
+      "type": "integer"
+    },
+    "achievementCount": {
+      "type": "integer"
+    },
+    "jobsCount": {
+      "type": "integer"
+    },
+    "consultationCount": {
+      "type": "integer"
+    },
+    "surveyCount": {
+      "type": "integer"
+    },
+    "totalStudyHours": {
+      "type": "decimal"
+    },
+    "coursesByType": {
+      "type": "json"
+    },
+    "gradeDistribution": {
+      "type": "json"
+    },
+    "studyTimeDistribution": {
+      "type": "json"
+    },
+    "updatedate": {
+      "type": "date"
+    }
+  }
+}
