@@ -5,10 +5,11 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      enabled: true,
-      headers: '*',
-      origin: ['http://localhost:3000/'] // 允许的前端域名列表
-    }
+      origin: ['http://localhost:3000'], // 去掉尾部斜杠
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept'], // ⭐ 加这一行
+    },
   },
   'strapi::poweredBy',
   'strapi::query',
