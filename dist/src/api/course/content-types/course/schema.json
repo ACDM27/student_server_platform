@@ -34,10 +34,10 @@
         "semester": {
             "type": "enumeration",
             "enum": [
-                "spring(Spring)",
-                "summer(Summer)",
-                "fall(Fall)",
-                "winter(Winter)"
+                "spring",
+                "summer",
+                "fall",
+                "winter"
             ]
         },
         "week": {
@@ -57,8 +57,8 @@
         "type": {
             "type": "enumeration",
             "enum": [
-                "CompulsoryCourse_必修",
-                "ElectiveCourse_ 选修"
+                "CompulsoryCourse",
+                "ElectiveCourse"
             ]
         }
     }

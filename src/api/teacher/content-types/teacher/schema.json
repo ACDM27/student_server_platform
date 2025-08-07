@@ -24,9 +24,6 @@
     "department": {
       "type": "string"
     },
-    "researchAreas": {
-      "type": "json"
-    },
     "rating": {
       "type": "decimal"
     },
@@ -35,9 +32,6 @@
     },
     "recruiting": {
       "type": "boolean"
-    },
-    "courses": {
-      "type": "json"
     },
     "officeLocation": {
       "type": "string"
@@ -60,6 +54,12 @@
     },
     "contactPhone": {
       "type": "string"
+    },
+    "research_direction": {
+      "type": "text"
+    },
+    "current_courses": {
+      "type": "text"
     }
   }
 }

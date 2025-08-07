@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activities",
+  "info": {
+    "singularName": "activity",
+    "pluralName": "activities",
+    "displayName": "Activity"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "registration_start_time": {
+      "type": "date"
+    },
+    "registration_end_time": {
+      "type": "date"
+    },
+    "max_participants": {
+      "type": "integer"
+    },
+    "credits": {
+      "type": "decimal"
+    },
+    "activity_type": {
+      "type": "enumeration",
+      "enum": [
+        "collegeActivities",
+        "campusActivities",
+        "associationActivities",
+        "youthLeagueCommitteeActivities"
+      ]
+    },
+    "activitystatus": {
+      "type": "enumeration",
+      "enum": [
+        "ongoing",
+        "completed",
+        "not_started"
+      ]
+    },
+    "collegename": {
+      "type": "string"
+    },
+    "associationname": {
+      "type": "string"
+    },
+    "youthLeaguename": {
+      "type": "string"
+    }
+  }
+}

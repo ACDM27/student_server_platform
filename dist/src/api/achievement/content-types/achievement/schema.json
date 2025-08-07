@@ -20,32 +20,33 @@
         "category": {
             "type": "enumeration",
             "enum": [
-                "competition_竞赛",
-                "research_科研",
-                "project_项目",
-                "paper_论文",
-                "patent_专利",
-                "certification​_证书"
+                "competition",
+                "research",
+                "project",
+                "paper",
+                "patent",
+                "certification​"
             ]
         },
         "award": {
             "type": "enumeration",
             "enum": [
-                "first prize_一等奖",
-                "second prize_二等奖",
-                "third prize_三等奖",
-                "honorable mention_优胜奖",
-                "grand prize_特等奖",
-                "other_其他"
+                "firstprize",
+                "secondprize",
+                "thirdprize",
+                "honorablemention",
+                "grandprize",
+                "other"
             ]
         },
         "level": {
             "type": "enumeration",
             "enum": [
-                "collegeLevel_院级",
-                "universityLevel_校级",
-                "provincialLevel_省部级",
-                "internationalLevel_国际级"
+                "college",
+                "university",
+                "national",
+                "provincial",
+                "international"
             ]
         },
         "date": {

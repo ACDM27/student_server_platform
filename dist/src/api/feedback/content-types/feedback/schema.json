@@ -35,10 +35,10 @@
         "category": {
             "type": "enumeration",
             "enum": [
-                "Suggestion_建议",
-                "Appeal_申诉",
-                "Issue_问题",
-                "Other_其他"
+                "Suggestion",
+                "Appeal",
+                "Issue",
+                "Other"
             ]
         },
         "content": {
@@ -57,9 +57,9 @@
         "feedbackstatus": {
             "type": "enumeration",
             "enum": [
-                "pending_待处理",
-                "processing_处理中",
-                "resolved_已处理"
+                "pending",
+                "processing",
+                "resolved"
             ]
         },
         "reply": {
